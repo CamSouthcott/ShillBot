@@ -67,7 +67,7 @@ class TestWorkerBasic(unittest.TestCase):
         worker.max_links = 10
         
         for i in range(5):
-            worker.add_links('link' + str(i))
+            worker.add_links(['link' + str(i)])
             
         self.assertEqual(len(worker.to_crawl), 5)
         
