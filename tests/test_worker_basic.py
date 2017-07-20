@@ -66,13 +66,13 @@ class TestWorkerBasic(unittest.TestCase):
 
         worker.max_links = 10
         
-        for i in xrange(5):
+        for i in range(5):
             worker.add_links('link' + str(i))
             
         self.assertEqual(len(worker.to_crawl), 5)
         
         links_list = []
-        for i in xrange(5,10):
+        for i in range(5,10):
             links_list.append('link' + str(i))
             
         worker.add_links(links_list)
