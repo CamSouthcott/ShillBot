@@ -3,7 +3,7 @@ import unittest
 import codecs
 import os
 
-from workers.basic_worker import BasicUserParseWorker
+from workers.basic_worker import BasicUserParseWorker, WorkerException
 
 
 class TestWorkerBasic(unittest.TestCase):
@@ -49,6 +49,12 @@ class TestWorkerBasic(unittest.TestCase):
         len_to_crawl_after = len(worker.to_crawl)
 
         self.assertEqual(len_to_crawl_after, len_to_crawl_before)
+		
+	def test_worker_bad_url(self):
+		worker = BasicUserParseWorker('https://www.slkdfjasdlwrwqerwerwerwer.com')
+		
+		#worker should raise a WorkerException trying to get data from a nonexistant url
+		self.assertRaises(WorkerException, worker, run)
 
 
 
