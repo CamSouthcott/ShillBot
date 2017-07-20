@@ -84,7 +84,7 @@ class TestWorkerBasic(unittest.TestCase):
         worker = BasicUserParseWorker('https://www.slkdfjasdlwrwqerwerwerwer.com')
         
         #worker should raise a WorkerException trying to get data from a nonexistant url
-        self.assertRaises(WorkerException, worker, run)
+        self.assertRaises(WorkerException, worker.run)
 
 
 
