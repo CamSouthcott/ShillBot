@@ -49,42 +49,42 @@ class TestWorkerBasic(unittest.TestCase):
         len_to_crawl_after = len(worker.to_crawl)
 
         self.assertEqual(len_to_crawl_after, len_to_crawl_before)
-		
-	#adds an empty list to the to_crawl list, should do nothing
-	def test_worker_add_links_empty_list(self):
-		worker = BasicUserParseWorker("https://www.reddit.com/user/Chrikelnel")
-		
-		before_links = len(worker.to_crawl)
-		worker.add_links([])
-		after_links = len(worker.to_crawl)
-		
-		self.assertEqual(before_links, after_links)
-		
-	#general add_links test, puts 5 links in the list and then adds a list of 5 other links to it
-	def test_worker_add_links(self):
-		worker = BasicUserParseWorker("https://www.reddit.com/user/Chrikelnel")
+        
+    #adds an empty list to the to_crawl list, should do nothing
+    def test_worker_add_links_empty_list(self):
+        worker = BasicUserParseWorker("https://www.reddit.com/user/Chrikelnel")
+        
+        before_links = len(worker.to_crawl)
+        worker.add_links([])
+        after_links = len(worker.to_crawl)
+        
+        self.assertEqual(before_links, after_links)
+        
+    #general add_links test, puts 5 links in the list and then adds a list of 5 other links to it
+    def test_worker_add_links(self):
+        worker = BasicUserParseWorker("https://www.reddit.com/user/Chrikelnel")
 
         worker.max_links = 10
-		
-		for i in xrange(5):
-			worker.add_links('link' + str(i))
-			
-		self.assertEqual(len(worker.to_crawl), 5)
-		
-		links_list = []
-		for i in xrange(5,10):
-			links_list.append('link' + str(i))
-			
-		worker.add_links(links_list)
-		
-		self.assertEqual(len(worker.to_crawl), 10)
-		
-	#send worker to nonexistant url
-	def test_worker_bad_url(self):
-		worker = BasicUserParseWorker('https://www.slkdfjasdlwrwqerwerwerwer.com')
-		
-		#worker should raise a WorkerException trying to get data from a nonexistant url
-		self.assertRaises(WorkerException, worker, run)
+        
+        for i in xrange(5):
+            worker.add_links('link' + str(i))
+            
+        self.assertEqual(len(worker.to_crawl), 5)
+        
+        links_list = []
+        for i in xrange(5,10):
+            links_list.append('link' + str(i))
+            
+        worker.add_links(links_list)
+        
+        self.assertEqual(len(worker.to_crawl), 10)
+        
+    #send worker to nonexistant url
+    def test_worker_bad_url(self):
+        worker = BasicUserParseWorker('https://www.slkdfjasdlwrwqerwerwerwer.com')
+        
+        #worker should raise a WorkerException trying to get data from a nonexistant url
+        self.assertRaises(WorkerException, worker, run)
 
 
 
